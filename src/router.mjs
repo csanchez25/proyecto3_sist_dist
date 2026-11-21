@@ -52,11 +52,47 @@ export function createApiHandler(getRedis) {
         if (request.method === 'DELETE' && id !== null) return reply(await deleteEntity(db, kind, id));
       }
       fail(405, 'Método no permitido para esta ruta.');
+
     } catch (err) {
-      if (err instanceof ApiError) return reply({ error: err.message }, err.status);
-      // No filtrar información sensible del proveedor de Redis ni de las claves JWT.
-      console.error('Fallo interno al procesar una solicitud:', err.name || 'Error');
-      return reply({ error: 'Servicio temporalmente no disponible. Revise la configuración de Redis y JWT.' }, 503);
+      if (err instanceof ApiError) {
+        return reply({ error: err.message }, err.status);
+      }
+
+      // Diagnóstico sin exponer credenciales
+      const details = [
+        err?.code,
+        err?.message,
+        err?.cause?.code,
+        err?.cause?.message,
+        err?.cause?.cause?.code
+      ].filter(Boolean).join(' ').toUpperCase();
+
+      let diagnostic_code = 'INTERNAL_ERROR';
+
+      if (/WRONGPASS|NOAUTH|AUTHENTICATION|INVALID PASSWORD/.test(details)) {
+        diagnostic_code = 'REDIS_AUTH';
+      } else if (/ENOTFOUND|EAI_AGAIN/.test(details)) {
+        diagnostic_code = 'REDIS_DNS';
+      } else if (/ETIMEDOUT|TIMEOUT/.test(details)) {
+        diagnostic_code = 'REDIS_TIMEOUT';
+      } else if (/ECONNREFUSED|ECONNRESET|EPIPE/.test(details)) {
+        diagnostic_code = 'REDIS_NETWORK';
+      } else if (/TLS|SSL|CERTIFICATE/.test(details)) {
+        diagnostic_code = 'REDIS_TLS';
+      } else if (/REDIS_URL|REDIS_HOST|REDIS_PORT|REDIS_TLS DEBE/.test(details)) {
+        diagnostic_code = 'REDIS_CONFIG';
+      } else if (/SIN CONEXI[ÓO]N A REDIS/.test(details)) {
+        diagnostic_code = 'REDIS_UNREACHABLE';
+      }
+
+      console.error('Diagnóstico API:', diagnostic_code);
+
+      return reply({
+        ok: false,
+        error: 'Error al conectar o procesar Redis.',
+        diagnostic_code
+      }, 503);
     }
+
   };
 }
