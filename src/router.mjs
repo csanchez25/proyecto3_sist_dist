@@ -23,6 +23,22 @@ export function createApiHandler(getRedis) {
       const url = new URL(request.url);
       const parts = apiPath(url);
       if (parts[0] !== 'api') fail(404, 'Ruta no encontrada.');
+
+      console.error('REDIS_ENV_CHECK', {
+        REDIS_URL_PRESENT: Boolean(process.env.REDIS_URL),
+        REDIS_HOST: Boolean(process.env.REDIS_HOST),
+        REDIS_PORT: Number.isInteger(Number(process.env.REDIS_PORT)) &&
+          Number(process.env.REDIS_PORT) > 0 &&
+          Number(process.env.REDIS_PORT) <= 65535,
+        REDIS_USERNAME: Boolean(process.env.REDIS_USERNAME),
+        REDIS_PASSWORD: Boolean(process.env.REDIS_PASSWORD),
+        REDIS_TLS: ['true', 'false'].includes(
+          (process.env.REDIS_TLS ?? '').trim().toLowerCase()
+        )
+      });
+
+
+
       const db = await getRedis();
       if (parts.length === 2 && parts[1] === 'health' && request.method === 'GET') {
         return reply({ ok: (await db.ping()) === 'PONG', service: 'Catálogo de puentes famosos', database: 'Redis Cloud' });
