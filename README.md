@@ -1,9 +1,7 @@
 # Proyecto 2 — Catálogo de Puentes Famosos (Redis Cloud + Netlify + JWT)
 
 **Estudiante:** Caleb Sánchez Solórzano  
-**Enlace de publicación en Netlify:** **PENDIENTE DE PUBLICACIÓN** — sustituir esta línea por `https://TU-SITIO.netlify.app/` después de desplegar.  
-**Tema:** Catálogo de puentes famosos, adaptación del Proyecto 1 para Sistemas Distribuidos.  
-**Versión previa (Cloudflare Workers, Proyecto 1):** https://catalogo-puentes-famosos.caleb-sanchez-solorzano.workers.dev/
+**Enlace de publicación en Netlify: https://proyecto3sistdistcalebsanchez.netlify.app/
 
 ## Qué incluye
 
@@ -93,28 +91,6 @@ Ejecutar **una vez** `npm run seed` después de configurar `REDIS_URL` **para `t
 
 No es necesario ejecutar SQL ni usar Cloudflare D1. Este comando **no corre automáticamente al desplegar** para evitar modificar datos en producción.
 
-## 6. Desplegar la aplicación en Netlify
-
-**Opción A — Repositorio conectado (recomendada):**
-
-1. Subir a GitHub/GitLab el contenido de esta carpeta, excluyendo `node_modules`, los secretos y `.netlify`.
-2. En Netlify seleccionar **Add new project → Import an existing project**, conectar el repositorio.
-3. Netlify lee `netlify.toml`: carpeta de publicación `public` y funciones `netlify/functions`. No hace falta comando de build para este sitio estático.
-4. Configurar **`REDIS_URL`** y **`JWT_SECRET`** en Netlify → variables de entorno. Ejecutar un nuevo deploy si las variables se agregaron después.
-5. Con Redis Cloud accesible, ejecutar el `npm run seed` **desde una terminal local autorizada** con las variables reales.
-6. Abrir la URL de Netlify (ejemplo: `https://TU-SITIO.netlify.app/`) y probar `https://TU-SITIO.netlify.app/api/health`.
-7. **Editar este README.md para introducir la URL verdadera** antes de entregar.
-
-**Opción B — Netlify CLI:**
-
-```bash
-npm install
-npx netlify login
-npx netlify init
-npx netlify deploy --prod
-```
-
-Al hacer `netlify init` seleccionar el equipo/sitio correspondiente; la configuración de publicación proviene de `netlify.toml`. **No se incluye un enlace de Netlify real en este ZIP**, ya que el despliegue depende de las cuentas y credenciales privadas del estudiante.
 
 ## 7. Cómo probar en el navegador
 
@@ -125,60 +101,3 @@ Al hacer `netlify init` seleccionar el equipo/sitio correspondiente; la configur
 5. Cerrar sesión y verificar que desaparezcan las acciones de edición.
 6. Probar inicio de sesión. El JWT tiene 1 hora de validez; una API protegida responde 401 cuando expira y el frontend lleva al login.
 
-### Pruebas rápidas de API
-
-```bash
-# Salud del backend y conexión a Redis
-curl https://TU-SITIO.netlify.app/api/health
-
-# Colecciones públicas
-curl https://TU-SITIO.netlify.app/api/bridges
-curl https://TU-SITIO.netlify.app/api/countries
-curl https://TU-SITIO.netlify.app/api/bridge-types
-
-# Acceso denegado sin JWT: HTTP 401
-curl -i -X DELETE https://TU-SITIO.netlify.app/api/bridges/1
-```
-
-**Prueba automatizada sin Redis real:** `npm test` ejecuta una implementación simulada de Redis para comprobar API, datos, JWT, filtros, restricciones y CRUD. **No sustituye una prueba real de conexión, publicación o navegador**.
-
-## 8. Estructura del proyecto
-
-```text
-.
-├── netlify.toml                 # publicación public + redirección /api/*
-├── netlify/functions/api.mjs    # punto de entrada Netlify Functions
-├── src/
-│   ├── router.mjs              # rutas REST y validación de métodos
-│   ├── redis.mjs               # conexión reutilizable a Redis Cloud
-│   ├── store.mjs               # persistencia Redis / CRUD / relaciones
-│   ├── auth.mjs                # registro, login, hashes, JWT y roles
-│   └── errors.mjs              # validaciones y errores HTTP
-├── data/seed.json              # datos originales de Proyecto 1
-├── scripts/seed.mjs            # carga inicial de Redis Cloud
-├── public/
-│   ├── index.html
-│   ├── bridges.html
-│   ├── countries.html
-│   ├── types.html
-│   ├── login.html
-│   ├── register.html
-│   ├── js/ y css/
-├── tests/api.test.mjs          # pruebas automatizadas
-└── docs/                       # endpoints, modelo y checklist
-```
-
-## 9. Notas técnicas
-
-- Las colecciones del dominio siguen siendo **tres**. Se añade una colección técnica de **usuarios** para autenticación.
-- Cada registro es una cadena JSON en Redis: `catalog:v2:bridges:1`, etc. Los IDs están en conjuntos de índices y los nuevos IDs se obtienen con secuencias `INCR`.
-- Se mantienen las referencias numéricas `country_id` y `bridge_type_id`; Redis no exige claves foráneas, por lo que la API verifica referencias antes de escribir y evita borrar entidades en uso.
-- Las imágenes se conservan como **URLs** originales del Proyecto 1 y requieren disponibilidad de las fuentes remotas.
-- El frontend y los servicios REST usan el **mismo dominio de Netlify**, sin configuración CORS abierta ni almacenamiento de JWT en cookies.
-- Para un sistema de alta concurrencia se recomendaría fortalecer la atomicidad del control de unicidad mediante Lua/transacciones y añadir medidas de anti-abuso para registro/login. Esta implementación conserva el comportamiento académico del Proyecto 1.
-
-## Referencias de configuración
-
-- [Netlify Functions — introducción](https://docs.netlify.com/build/functions/get-started/)
-- [Redirecciones Netlify](https://docs.netlify.com/manage/routing/redirects/redirect-options/)
-- [Node Redis — conexión](https://redis.io/docs/latest/develop/clients/nodejs/connect/)
