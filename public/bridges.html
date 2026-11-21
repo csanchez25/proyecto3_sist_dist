@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puentes | Catálogo de Puentes Famosos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/"><span class="brand-mark">🌉</span><span>Puentes Famosos</span></a>
+  <nav class="nav"><a href="/">Inicio</a><a class="active" href="/bridges.html">Puentes</a><a href="/countries.html">Países</a><a href="/types.html">Tipos</a></nav>
+</div></header>
+<main id="app" class="container">
+  <div class="page-title"><div><h1>Puentes</h1><div class="muted">Entidad principal · {{ filteredBridges.length }} registros visibles</div></div><button class="btn btn-primary" v-if="canEdit" @click="startCreate">+ Nuevo puente</button></div>
+
+  <div v-if="!canEdit" class="notice-readonly">Consulta pública del catálogo. <a href="/login.html">Inicia sesión</a> para administrar puentes.</div>
+  <div v-if="message" :class="['alert', messageType === 'error' ? 'alert-error' : 'alert-success']">{{ message }}</div>
+
+  <section v-if="showForm && canEdit" class="panel">
+    <h2>{{ editingId ? 'Editar puente' : 'Crear puente' }}</h2>
+    <form @submit.prevent="save">
+      <div class="form-grid">
+        <div><label>Nombre *</label><input v-model="form.name" required /></div>
+        <div><label>Ciudad *</label><input v-model="form.city" required /></div>
+        <div><label>País *</label><select v-model.number="form.country_id" required><option disabled value="">Seleccione...</option><option v-for="c in countries" :key="c.id" :value="c.id">{{ c.name }}</option></select></div>
+        <div><label>Tipo *</label><select v-model.number="form.bridge_type_id" required><option disabled value="">Seleccione...</option><option v-for="t in types" :key="t.id" :value="t.id">{{ t.name }}</option></select></div>
+        <div><label>Año de finalización</label><input v-model.number="form.completion_year" type="number" /></div>
+        <div><label>Longitud total (m)</label><input v-model.number="form.length_m" type="number" step="0.1" /></div>
+        <div><label>Vano principal (m)</label><input v-model.number="form.main_span_m" type="number" step="0.1" /></div>
+        <div><label>URL de imagen</label><input v-model="form.image_url" type="url" /></div>
+        <div><label>Latitud</label><input v-model.number="form.latitude" type="number" step="any" /></div>
+        <div><label>Longitud</label><input v-model.number="form.longitude" type="number" step="any" /></div>
+        <div class="full"><label>Fuente</label><input v-model="form.source_url" type="url" /></div>
+        <div class="full"><label>Descripción *</label><textarea v-model="form.description" required></textarea></div>
+      </div>
+      <div class="form-actions"><button class="btn btn-primary" type="submit">Guardar</button><button class="btn btn-secondary" type="button" @click="cancelForm">Cancelar</button></div>
+    </form>
+  </section>
+
+  <div class="toolbar">
+    <input v-model="search" placeholder="Buscar por nombre, ciudad o país..." />
+    <select v-model="countryFilter"><option value="">Todos los países</option><option v-for="c in countries" :key="c.id" :value="String(c.id)">{{ c.name }}</option></select>
+    <select v-model="typeFilter"><option value="">Todos los tipos</option><option v-for="t in types" :key="t.id" :value="String(t.id)">{{ t.name }}</option></select>
+  </div>
+
+  <div v-if="loading" class="empty">Cargando puentes...</div>
+  <div v-else-if="!filteredBridges.length" class="empty panel">No hay puentes que coincidan con los filtros.</div>
+  <section v-else class="data-grid">
+    <article v-for="b in filteredBridges" :key="b.id" class="card entity-card">
+      <img class="thumb" :src="b.image_url" :alt="b.name" @error="imageFallback" />
+      <div class="card-body" style="display:flex;flex-direction:column;flex:1">
+        <div><span class="badge">{{ b.bridge_type_name }}</span></div>
+        <h3 style="margin-top:10px">{{ b.name }}</h3>
+        <div class="muted">{{ b.city }} · {{ b.country_name }}</div>
+        <div class="entity-meta"><span><strong>Año:</strong> {{ formatYear(b.completion_year) }}</span><span><strong>Longitud:</strong> {{ formatNumber(b.length_m) }} m</span><span><strong>Vano:</strong> {{ formatNumber(b.main_span_m) }} m</span></div>
+        <div class="entity-actions"><button class="btn btn-secondary btn-small" @click="viewBridge(b.id)">Ver</button><button class="btn btn-primary btn-small" v-if="canEdit" @click="startEdit(b)">Editar</button><button class="btn btn-danger btn-small" v-if="canEdit" @click="removeBridge(b)">Eliminar</button></div>
+      </div>
+    </article>
+  </section>
+
+  <div v-if="detail" class="detail-overlay" @click.self="detail=null">
+    <article class="detail-modal">
+      <img :src="detail.image_url" :alt="detail.name" @error="imageFallback" />
+      <div class="detail-content">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><span class="badge">{{ detail.bridge_type_name }}</span><h2>{{ detail.name }}</h2></div><button class="btn btn-secondary btn-small" @click="detail=null">Cerrar</button></div>
+        <p>{{ detail.description }}</p>
+        <div class="detail-list">
+          <div><strong>Ubicación</strong>{{ detail.city }}, {{ detail.country_name }}</div>
+          <div><strong>Año</strong>{{ formatYear(detail.completion_year) }}</div>
+          <div><strong>Longitud total</strong>{{ formatNumber(detail.length_m) }} m</div>
+          <div><strong>Vano principal</strong>{{ formatNumber(detail.main_span_m) }} m</div>
+          <div><strong>Principio estructural</strong>{{ detail.structural_principle }}</div>
+          <div><strong>Material típico</strong>{{ detail.typical_material }}</div>
+        </div>
+        <p v-if="detail.source_url" style="margin-top:16px"><a :href="detail.source_url" target="_blank" rel="noreferrer">Abrir fuente de referencia ↗</a></p>
+      </div>
+    </article>
+  </div>
+</main>
+<center><footer class="footer">Proyecto 2 · Sistemas Distribuidos · Caleb Sánchez Solórzano</footer></center>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/session.js"></script>
+<script src="/js/bridges.js"></script>
+</body>
+</html>

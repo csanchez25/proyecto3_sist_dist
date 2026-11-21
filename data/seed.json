@@ -1,0 +1,308 @@
+{
+  "bridges": [
+    {
+      "id": 1,
+      "name": "Golden Gate Bridge",
+      "city": "San Francisco",
+      "country_id": 1,
+      "bridge_type_id": 1,
+      "completion_year": 1937,
+      "length_m": 2737.0,
+      "main_span_m": 1280.0,
+      "description": "Puente colgante que cruza el estrecho Golden Gate y conecta San Francisco con el condado de Marin. Es uno de los símbolos más reconocibles de California.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Golden_Gate_Bridge_as_seen_from_Battery_East.jpg/330px-Golden_Gate_Bridge_as_seen_from_Battery_East.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Golden_Gate_Bridge",
+      "latitude": 37.819722,
+      "longitude": -122.478611
+    },
+    {
+      "id": 2,
+      "name": "Brooklyn Bridge",
+      "city": "Nueva York",
+      "country_id": 1,
+      "bridge_type_id": 6,
+      "completion_year": 1883,
+      "length_m": 1834.0,
+      "main_span_m": 486.3,
+      "description": "Puente histórico sobre el East River entre Manhattan y Brooklyn. Su diseño combina elementos de suspensión y atirantamiento.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Brooklyn_Bridge_and_the_Lower_Manhattan_skyline_from_Pebble_Beach%2C_New_York.jpg/330px-Brooklyn_Bridge_and_the_Lower_Manhattan_skyline_from_Pebble_Beach%2C_New_York.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Brooklyn_Bridge",
+      "latitude": 40.7057,
+      "longitude": -73.9964
+    },
+    {
+      "id": 3,
+      "name": "Tower Bridge",
+      "city": "Londres",
+      "country_id": 2,
+      "bridge_type_id": 5,
+      "completion_year": 1894,
+      "length_m": 244.0,
+      "main_span_m": 61.0,
+      "description": "Puente sobre el río Támesis famoso por sus dos torres y sus hojas basculantes, que pueden elevarse para permitir el paso de barcos.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Tower_Bridge_at_Dawn.jpg/330px-Tower_Bridge_at_Dawn.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Tower_Bridge",
+      "latitude": 51.5056,
+      "longitude": -0.0753
+    },
+    {
+      "id": 4,
+      "name": "Sydney Harbour Bridge",
+      "city": "Sídney",
+      "country_id": 3,
+      "bridge_type_id": 2,
+      "completion_year": 1932,
+      "length_m": 1149.0,
+      "main_span_m": 503.0,
+      "description": "Puente de arco de acero que cruza el puerto de Sídney y constituye, junto con la Ópera de Sídney, una de las imágenes más conocidas de Australia.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sydney_Harbour_Bridge-16_October_2025.jpg/330px-Sydney_Harbour_Bridge-16_October_2025.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Sydney_Harbour_Bridge",
+      "latitude": -33.852222,
+      "longitude": 151.210556
+    },
+    {
+      "id": 5,
+      "name": "Akashi Kaikyo Bridge",
+      "city": "Kobe",
+      "country_id": 4,
+      "bridge_type_id": 1,
+      "completion_year": 1998,
+      "length_m": 3911.0,
+      "main_span_m": 1991.0,
+      "description": "Puente colgante japonés que cruza el estrecho de Akashi. Al inaugurarse tuvo el vano central más largo del mundo.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/%E6%98%8E%E7%9F%B3%E6%B5%B7%E5%B3%A1%E5%A4%A7%E6%A9%8B_-_panoramio_%281%29_%28cropped%29.jpg/330px-%E6%98%8E%E7%9F%B3%E6%B5%B7%E5%B3%A1%E5%A4%A7%E6%A9%8B_-_panoramio_%281%29_%28cropped%29.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Akashi_Kaikyo_Bridge",
+      "latitude": 34.6162,
+      "longitude": 135.0205
+    },
+    {
+      "id": 6,
+      "name": "Viaducto de Millau",
+      "city": "Millau",
+      "country_id": 5,
+      "bridge_type_id": 3,
+      "completion_year": 2004,
+      "length_m": 2460.0,
+      "main_span_m": 342.0,
+      "description": "Viaducto atirantado de múltiples vanos sobre el valle del Tarn, diseñado por un equipo liderado por Michel Virlogeux y Norman Foster.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/ViaducdeMillau.jpg/330px-ViaducdeMillau.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Millau_Viaduct",
+      "latitude": 44.079444,
+      "longitude": 3.022222
+    },
+    {
+      "id": 7,
+      "name": "Puente de Carlos",
+      "city": "Praga",
+      "country_id": 6,
+      "bridge_type_id": 2,
+      "completion_year": 1402,
+      "length_m": 516.0,
+      "main_span_m": 13.4,
+      "description": "Puente medieval de piedra que cruza el río Moldava en Praga. Su construcción comenzó en 1357 y terminó a inicios del siglo XV.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg/330px-Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Charles_Bridge",
+      "latitude": 50.086389,
+      "longitude": 14.411944
+    },
+    {
+      "id": 8,
+      "name": "Puente de Rialto",
+      "city": "Venecia",
+      "country_id": 7,
+      "bridge_type_id": 2,
+      "completion_year": 1591,
+      "length_m": 48.0,
+      "main_span_m": 28.8,
+      "description": "Puente de piedra sobre el Gran Canal de Venecia y el más antiguo de los cuatro puentes que actualmente lo cruzan.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Rialto_2025_4.jpg/330px-Rialto_2025_4.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Rialto_Bridge",
+      "latitude": 45.438,
+      "longitude": 12.336
+    },
+    {
+      "id": 9,
+      "name": "Forth Bridge",
+      "city": "Edimburgo",
+      "country_id": 2,
+      "bridge_type_id": 4,
+      "completion_year": 1890,
+      "length_m": 2467.0,
+      "main_span_m": 521.0,
+      "description": "Puente ferroviario en voladizo sobre el Firth of Forth, reconocido como un hito de la ingeniería británica y Patrimonio Mundial de la UNESCO.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Forth_Bridge_2022.jpg/330px-Forth_Bridge_2022.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Forth_Bridge",
+      "latitude": 56.0004,
+      "longitude": -3.3886
+    },
+    {
+      "id": 10,
+      "name": "Ponte Vecchio",
+      "city": "Florencia",
+      "country_id": 7,
+      "bridge_type_id": 2,
+      "completion_year": 1345,
+      "length_m": 95.0,
+      "main_span_m": 30.0,
+      "description": "Puente medieval de arcos rebajados sobre el río Arno, conocido por las tiendas construidas a lo largo de su tablero.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Ponte_Vecchio_from_Ponte_alle_Grazie.jpg/330px-Ponte_Vecchio_from_Ponte_alle_Grazie.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Ponte_Vecchio",
+      "latitude": 43.76799,
+      "longitude": 11.25316
+    },
+    {
+      "id": 11,
+      "name": "Puente 25 de Abril",
+      "city": "Lisboa",
+      "country_id": 8,
+      "bridge_type_id": 1,
+      "completion_year": 1966,
+      "length_m": 2277.6,
+      "main_span_m": 1013.0,
+      "description": "Puente colgante que une Lisboa con Almada a través del río Tajo y transporta tráfico carretero y ferroviario.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/25_De_Abril_Bridge_%28226290561%29.jpeg/330px-25_De_Abril_Bridge_%28226290561%29.jpeg",
+      "source_url": "https://en.wikipedia.org/wiki/25_de_Abril_Bridge",
+      "latitude": 38.689167,
+      "longitude": -9.176944
+    },
+    {
+      "id": 12,
+      "name": "Pont du Gard",
+      "city": "Vers-Pont-du-Gard",
+      "country_id": 5,
+      "bridge_type_id": 2,
+      "completion_year": 50,
+      "length_m": 275.0,
+      "main_span_m": 24.5,
+      "description": "Acueducto-puente romano del siglo I d. C. construido para conducir agua hacia la antigua ciudad de Nemausus, actual Nîmes.",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Pont_du_Gard_BLS.jpg/330px-Pont_du_Gard_BLS.jpg",
+      "source_url": "https://en.wikipedia.org/wiki/Pont_du_Gard",
+      "latitude": 43.947222,
+      "longitude": 4.535556
+    }
+  ],
+  "countries": [
+    {
+      "id": 1,
+      "name": "Estados Unidos",
+      "continent": "América del Norte",
+      "capital": "Washington D. C.",
+      "iso_code": "US",
+      "image_url": "https://flagcdn.com/w320/us.png",
+      "description": "País norteamericano con numerosos puentes históricos y de gran escala."
+    },
+    {
+      "id": 2,
+      "name": "Reino Unido",
+      "continent": "Europa",
+      "capital": "Londres",
+      "iso_code": "GB",
+      "image_url": "https://flagcdn.com/w320/gb.png",
+      "description": "Estado insular europeo con una extensa tradición de ingeniería civil."
+    },
+    {
+      "id": 3,
+      "name": "Australia",
+      "continent": "Oceanía",
+      "capital": "Canberra",
+      "iso_code": "AU",
+      "image_url": "https://flagcdn.com/w320/au.png",
+      "description": "País de Oceanía donde se encuentra uno de los puentes de arco más reconocibles del mundo."
+    },
+    {
+      "id": 4,
+      "name": "Japón",
+      "continent": "Asia",
+      "capital": "Tokio",
+      "iso_code": "JP",
+      "image_url": "https://flagcdn.com/w320/jp.png",
+      "description": "País asiático destacado por su infraestructura y grandes obras de ingeniería sísmica."
+    },
+    {
+      "id": 5,
+      "name": "Francia",
+      "continent": "Europa",
+      "capital": "París",
+      "iso_code": "FR",
+      "image_url": "https://flagcdn.com/w320/fr.png",
+      "description": "País europeo con puentes que abarcan desde la ingeniería romana hasta estructuras contemporáneas."
+    },
+    {
+      "id": 6,
+      "name": "Chequia",
+      "continent": "Europa",
+      "capital": "Praga",
+      "iso_code": "CZ",
+      "image_url": "https://flagcdn.com/w320/cz.png",
+      "description": "País centroeuropeo cuyo patrimonio incluye importantes puentes medievales."
+    },
+    {
+      "id": 7,
+      "name": "Italia",
+      "continent": "Europa",
+      "capital": "Roma",
+      "iso_code": "IT",
+      "image_url": "https://flagcdn.com/w320/it.png",
+      "description": "País europeo reconocido por sus puentes históricos de piedra y arquitectura renacentista."
+    },
+    {
+      "id": 8,
+      "name": "Portugal",
+      "continent": "Europa",
+      "capital": "Lisboa",
+      "iso_code": "PT",
+      "image_url": "https://flagcdn.com/w320/pt.png",
+      "description": "País europeo con importantes cruces sobre el río Tajo y otras obras de ingeniería."
+    }
+  ],
+  "bridge_types": [
+    {
+      "id": 1,
+      "name": "Puente colgante",
+      "description": "El tablero se sostiene mediante cables verticales suspendidos de cables principales que pasan sobre torres.",
+      "structural_principle": "Los cables principales trabajan principalmente a tracción y transfieren las cargas a anclajes y torres.",
+      "typical_material": "Acero y concreto",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Golden_Gate_Bridge_as_seen_from_Battery_East.jpg/330px-Golden_Gate_Bridge_as_seen_from_Battery_East.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Puente de arco",
+      "description": "La estructura principal utiliza uno o varios arcos para transmitir las cargas hacia los apoyos laterales.",
+      "structural_principle": "El arco trabaja predominantemente a compresión y conduce las fuerzas hacia estribos o pilares.",
+      "typical_material": "Piedra, mampostería, acero o concreto",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sydney_Harbour_Bridge-16_October_2025.jpg/330px-Sydney_Harbour_Bridge-16_October_2025.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Puente atirantado",
+      "description": "El tablero se conecta directamente a torres mediante múltiples tirantes inclinados.",
+      "structural_principle": "Los tirantes trabajan a tracción y las torres transfieren las cargas a las cimentaciones.",
+      "typical_material": "Acero y concreto pretensado",
+      "image_url": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/ViaducdeMillau.jpg/330px-ViaducdeMillau.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Puente en voladizo",
+      "description": "Emplea brazos estructurales que se proyectan desde pilares y se equilibran mediante tramos en voladizo.",
+      "structural_principle": "Los elementos trabajan con combinaciones de flexión, compresión y tracción alrededor de los apoyos.",
+      "typical_material": "Acero estructural",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Forth_Bridge_2022.jpg/330px-Forth_Bridge_2022.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Puente basculante",
+      "description": "Posee uno o más tramos móviles que giran para permitir el paso de embarcaciones.",
+      "structural_principle": "El tablero móvil rota alrededor de un eje y suele equilibrarse mediante contrapesos.",
+      "typical_material": "Acero y mampostería/concreto en torres y apoyos",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Tower_Bridge_at_Dawn.jpg/330px-Tower_Bridge_at_Dawn.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Puente híbrido suspensión-atirantado",
+      "description": "Combina rasgos de los puentes colgantes y atirantados en un mismo sistema resistente.",
+      "structural_principle": "Parte de las cargas se transmite mediante cables principales y otra mediante tirantes o elementos diagonales.",
+      "typical_material": "Acero, piedra y cables de acero",
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Brooklyn_Bridge_and_the_Lower_Manhattan_skyline_from_Pebble_Beach%2C_New_York.jpg/330px-Brooklyn_Bridge_and_the_Lower_Manhattan_skyline_from_Pebble_Beach%2C_New_York.jpg"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iniciar sesión | Puentes Famosos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body data-auth-page="login">
+<header class="site-header"><div class="header-inner">
+  <a class="brand" href="/"><span class="brand-mark">🌉</span><span>Puentes Famosos</span></a>
+  <nav class="nav"><a href="/">Inicio</a><a href="/bridges.html">Puentes</a><a href="/countries.html">Países</a><a href="/types.html">Tipos</a></nav>
+</div></header>
+<main id="app" class="container auth-shell">
+  <section class="panel auth-card">
+    <h1>Iniciar sesión</h1>
+    <p class="muted">Inicia sesión para crear, editar o eliminar registros del catálogo.</p>
+    <div v-if="error" class="alert alert-error" role="alert">{{ error }}</div>
+    <form @submit.prevent="submit">
+      <div class="field"><label for="email">Correo electrónico</label><input id="email" v-model.trim="email" type="email" autocomplete="email" required /></div>
+      <div class="field"><label for="password">Contraseña</label><input id="password" v-model="password" type="password" autocomplete="current-password" required /></div>
+      <button class="btn btn-primary full-button" :disabled="busy" type="submit">{{ busy ? 'Validando...' : 'Ingresar' }}</button>
+    </form>
+    <p class="auth-hint">¿No tienes una cuenta? <a href="/register.html">Regístrate</a>.</p>
+  </section>
+</main>
+<footer class="footer">Proyecto 2 · Sistemas Distribuidos · Caleb Sánchez Solórzano</footer>
+<script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+<script src="/js/api.js"></script><script src="/js/session.js"></script><script src="/js/auth-page.js"></script>
+</body>
+</html>

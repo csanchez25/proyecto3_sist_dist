@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Puentes Famosos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/"><span class="brand-mark">🌉</span><span>Puentes Famosos</span></a>
+      <nav class="nav">
+        <a class="active" href="/">Inicio</a>
+        <a href="/bridges.html">Puentes</a>
+        <a href="/countries.html">Países</a>
+        <a href="/types.html">Tipos</a>
+      </nav>
+    </div>
+  </header>
+  <main id="app" class="container">
+    <section class="hero">
+      <h1>Catálogo de puentes famosos</h1>
+      <p>Explora los puentes, países y estilos estructurales. Inicia sesión para administrar el catálogo.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" style="background:white;color:#1849a9" href="/bridges.html">Explorar puentes</a>
+        <a class="btn btn-primary" style="background:white;color:#1849a9" href="/countries.html">Ver países</a>
+        <a class="btn btn-primary" style="background:white;color:#1849a9" href="/types.html">Ver Tipos de Puentes</a>
+      </div>
+    </section>
+
+    <section class="grid grid-3 stats">
+      <article class="card">
+        <div class="card-body">
+          <div class="muted">Puentes</div>
+          <div class="stat-number">{{ stats.bridges }}</div>
+          <div class="muted">Entidad principal</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-body">
+          <div class="muted">Países</div>
+          <div class="stat-number">{{ stats.countries }}</div>
+          <div class="muted">Entidad secundaria</div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="card-body">
+          <div class="muted">Tipos</div>
+          <div class="stat-number">{{ stats.types }}</div>
+          <div class="muted">Entidad secundaria</div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <center>
+    <footer class="footer">Proyecto 2 · Sistemas Distribuidos · Caleb Sánchez Solórzano</footer>
+  </center>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="/js/api.js"></script>
+<script src="/js/session.js"></script>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data: () => ({ stats: { bridges: '…', countries: '…', types: '…' } }),
+      async mounted() {
+        try {
+          const [bridges, countries, types] = await Promise.all([
+            apiRequest('/api/bridges'), apiRequest('/api/countries'), apiRequest('/api/bridge-types')
+          ]);
+          this.stats = { bridges: bridges.length, countries: countries.length, types: types.length };
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }).mount('#app');
+  </script>
+</body>
+
+</html>

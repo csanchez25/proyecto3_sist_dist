@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Países | Catálogo de Puentes Famosos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner"><a class="brand" href="/"><span class="brand-mark">🌉</span><span>Puentes
+          Famosos</span></a>
+      <nav class="nav"><a href="/">Inicio</a><a href="/bridges.html">Puentes</a><a class="active"
+          href="/countries.html">Países</a><a href="/types.html">Tipos</a></nav>
+    </div>
+  </header>
+  <main id="app" class="container">
+    <div class="page-title">
+      <div>
+        <h1>Países</h1>
+        <div class="muted">Entidad secundaria · {{ countries.length }} registros</div>
+      </div><button class="btn btn-primary" v-if="canEdit" @click="startCreate">+ Nuevo país</button>
+    </div>
+    <div v-if="!canEdit" class="notice-readonly">Consulta pública. <a href="/login.html">Inicia sesión</a> para administrar países.</div>
+    <div v-if="message" :class="['alert', messageType==='error'?'alert-error':'alert-success']">{{ message }}</div>
+    <section v-if="showForm && canEdit" class="panel">
+      <h2>{{ editingId ? 'Editar país' : 'Crear país' }}</h2>
+      <form @submit.prevent="save">
+        <div class="form-grid">
+          <div><label>Nombre *</label><input v-model="form.name" required /></div>
+          <div><label>Continente *</label><input v-model="form.continent" required /></div>
+          <div><label>Capital *</label><input v-model="form.capital" required /></div>
+          <div><label>Código ISO *</label><input v-model="form.iso_code" maxlength="2" required /></div>
+          <div class="full"><label>URL de imagen / bandera</label><input v-model="form.image_url" type="url" /></div>
+          <div class="full"><label>Descripción</label><textarea v-model="form.description"></textarea></div>
+        </div>
+        <div class="form-actions"><button class="btn btn-primary">Guardar</button><button class="btn btn-secondary"
+            type="button" @click="cancelForm">Cancelar</button></div>
+      </form>
+    </section>
+    <section class="data-grid">
+      <article v-for="c in countries" :key="c.id" class="card entity-card"><img class="thumb"
+          style="object-fit:contain;padding:24px" :src="c.image_url" :alt="c.name" @error="imageFallback" />
+        <div class="card-body" style="display:flex;flex-direction:column;flex:1"><span class="badge">{{ c.continent
+            }}</span>
+          <h3 style="margin-top:10px">{{ c.name }}</h3>
+          <div class="entity-meta"><span><strong>Capital:</strong> {{ c.capital }}</span><span><strong>ISO:</strong> {{
+              c.iso_code }}</span><span><strong>Puentes asociados:</strong> {{ c.bridge_count }}</span></div>
+          <p class="muted">{{ c.description }}</p>
+          <div class="entity-actions"><button class="btn btn-secondary btn-small"
+              @click="viewCountry(c.id)">Ver</button><button class="btn btn-primary btn-small"
+              v-if="canEdit" @click="startEdit(c)">Editar</button><button class="btn btn-danger btn-small"
+              v-if="canEdit" @click="removeCountry(c)">Eliminar</button></div>
+        </div>
+      </article>
+    </section>
+    <div v-if="detail" class="detail-overlay" @click.self="detail=null">
+      <article class="detail-modal"><img style="object-fit:contain;padding:26px" :src="detail.country.image_url"
+          :alt="detail.country.name" @error="imageFallback" />
+        <div class="detail-content">
+          <div style="display:flex;justify-content:space-between;gap:12px">
+            <div><span class="badge">{{ detail.country.continent }}</span>
+              <h2>{{ detail.country.name }}</h2>
+            </div><button class="btn btn-secondary btn-small" @click="detail=null">Cerrar</button>
+          </div>
+          <p>{{ detail.country.description }}</p>
+          <div class="detail-list">
+            <div><strong>Capital</strong>{{ detail.country.capital }}</div>
+            <div><strong>Código ISO</strong>{{ detail.country.iso_code }}</div>
+          </div>
+          <h3>Puentes relacionados</h3>
+          <p v-if="!detail.bridges.length" class="muted">No hay puentes asociados.</p>
+          <ul v-else>
+            <li v-for="b in detail.bridges" :key="b.id">{{ b.name }} — {{ b.city }} ({{ b.bridge_type_name }})</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </main>
+  <center>
+    <footer class="footer">Proyecto 2 · Sistemas Distribuidos · Caleb Sánchez Solórzano</footer>
+  </center>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="/js/api.js"></script>
+<script src="/js/session.js"></script>
+  <script src="/js/countries.js"></script>
+</body>
+
+</html>
